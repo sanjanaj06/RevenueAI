@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevenueAI Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div>
+            <h1>RevenueAI</h1>
+            <p>AI-Powered Payment Recovery System</p>
+        </div>
+        <div class="header-actions">
+            <button type="button" id="resetSystemBtn" class="reset-button">
+                ↺ Reset All Data
+            </button>
+            <div class="status">
+                <span class="status-dot"></span>
+                API Connected
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- 5 KPI CARDS (FULL WIDTH ROW) -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <h3>Failed Transactions</h3>
+                <p id="failedTransactions">-</p>
+            </div>
+            <div class="metric-card">
+                <h3>Failed Revenue</h3>
+                <p id="failedRevenue">-</p>
+            </div>
+            <div class="metric-card">
+                <h3>Revenue Recovered</h3>
+                <p id="revenueRecovered">-</p>
+            </div>
+            <div class="metric-card">
+                <h3>Recovery Rate</h3>
+                <p id="recoveryRate">-</p>
+            </div>
+            <div class="metric-card">
+                <h3>Attempted Success Rate</h3>
+                <p id="attemptedSuccessRate">-</p>
+            </div>
+        </section>
+
+        <!-- FAILED TRANSACTIONS TABLE (LEFT COLUMN) -->
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Failed Transactions</h2>
+                    <p>Transactions requiring recovery decisions</p>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Transaction</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Failure Reason</th>
+                            <th scope="col">Recovery Score</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionTable">
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #64748b; padding: 24px;">
+                                Loading transactions...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="pagination-container">
+                <span id="paginationInfo" class="pagination-info">Showing 1–50 of 500 transactions</span>
+                <div class="pagination-buttons">
+                    <button type="button" id="prevPageBtn" class="pagination-btn" disabled>← Previous</button>
+                    <span id="currentPageIndicator" class="page-indicator">Page 1 of 10</span>
+                    <button type="button" id="nextPageBtn" class="pagination-btn">Next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRANSACTION ANALYSIS (RIGHT COLUMN) -->
+        <section class="panel" id="detailsPanel">
+            <div class="panel-header">
+                <div>
+                    <h2>Transaction Analysis</h2>
+                    <p>AI-suggested recovery strategy</p>
+                </div>
+            </div>
+            <div id="transactionDetails">
+                <p>Select a transaction to view its recovery analysis.</p>
+            </div>
+        </section>
+
+        <!-- RECOVERY AUDIT TRAIL (FULL WIDTH BOTTOM) -->
+        <section class="panel audit-panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Recovery Audit Trail</h2>
+                    <p>Complete history of AI recovery decisions and policy outcomes</p>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Transaction</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">AI Decision</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Policy</th>
+                            <th scope="col">Result</th>
+                            <th scope="col">Recovered</th>
+                        </tr>
+                    </thead>
+                    <tbody id="auditTableBody">
+                        <tr>
+                            <td colspan="7" style="text-align: center; color: #64748b; padding: 24px;">
+                                Loading audit trail...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination-container">
+                <span id="auditPaginationInfo" class="pagination-info">Showing 0 of 0 records</span>
+                <div class="pagination-buttons">
+                    <button type="button" id="prevAuditPageBtn" class="pagination-btn" disabled>← Previous</button>
+                    <span id="currentAuditPageIndicator" class="page-indicator">Page 1 of 1</span>
+                    <button type="button" id="nextAuditPageBtn" class="pagination-btn">Next →</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="panel" id="auditDetailsPanel">
+            <div class="panel-header">
+                <div>
+                    <h2>Audit Record Details</h2>
+                    <p>In-depth decision, policy & recovery logs</p>
+                </div>
+            </div>
+            <div id="auditDetails">
+                <p>Select an audit record from the table to view its full details.</p>
+            </div>
+        </section>
+
+        <!-- VISUAL ANALYTICS: REVENUE LINE GRAPH (BELOW EVERYTHING) -->
+        <section class="panel chart-panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Revenue Recovery Trajectory</h2>
+                    <p>Live trend of cumulative recovered revenue over time</p>
+                </div>
+            </div>
+
+            <div class="canvas-holder-line">
+                <canvas id="recoveryLineChart"></canvas>
+            </div>
+        </section>
+
+    </main> <!-- End of container -->
+
+
+    <script src="script.js"></script>
+</body>
+</html>
