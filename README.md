@@ -125,8 +125,7 @@ RevenueAI provides an interface where transactions can be submitted and the resu
 ## ⚙️ Technologies Used
 
 * **Python**
-* **Artificial Intelligence**
-* **Rule-Based Decision System**
+* **AI model: Gemini 3.5 Flash Lite**
 * **HTML / CSS / JavaScript**
 * **Git & GitHub**
 
